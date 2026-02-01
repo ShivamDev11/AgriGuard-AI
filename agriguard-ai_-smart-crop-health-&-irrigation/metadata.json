@@ -1,0 +1,7 @@
+{
+  "name": "AgriGuard AI: Smart Crop Health & Irrigation",
+  "description": "An advanced AI-powered platform for detecting diseases in 120+ crops and managing smart irrigation systems with real-time analysis and 7-day historical tracking.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
