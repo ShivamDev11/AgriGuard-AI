@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   XAxis, 
@@ -16,21 +15,22 @@ import {
   CloudRain, 
   TrendingUp,
   AlertCircle,
-  ArrowRight
+  ArrowRight,
+  FileDown
 } from 'lucide-react';
 import { SensorData, ThemeType } from '../types';
 
 interface DashboardProps {
   historicalData: SensorData[];
   onViewReports: () => void;
+  onDownloadReport: () => void;
   theme: ThemeType;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ historicalData, onViewReports, theme }) => {
+const Dashboard: React.FC<DashboardProps> = ({ historicalData, onViewReports, onDownloadReport, theme }) => {
   const currentData = historicalData[historicalData.length - 1];
   const isDark = ['midnight', 'obsidian', 'cyberpunk', 'forest', 'ocean', 'volcanic', 'electric', 'solar'].includes(theme);
 
-  // Added 'auto' key to themeColors to fix missing property error for Record<ThemeType, string>
   const themeColors: Record<ThemeType, string> = {
     'auto': '#10b981',
     'bio-synth': '#10b981',
@@ -98,14 +98,23 @@ const Dashboard: React.FC<DashboardProps> = ({ historicalData, onViewReports, th
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
         <div>
           <span className={`text-xs font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-3 inline-block ${
             isDark ? 'bg-white/10 text-white' : 'bg-emerald-100 text-emerald-700'
           }`}>Intelligence Hub</span>
           <h2 className={`text-5xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>Farm Overview</h2>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <button 
+            onClick={onDownloadReport}
+            className={`px-5 py-2.5 rounded-2xl flex items-center gap-3 border font-black text-sm transition-all hover:scale-[1.02] active:scale-95 ${
+              isDark ? 'bg-white text-black border-white' : 'bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-900/10'
+            }`}
+          >
+            <FileDown size={18} strokeWidth={3} />
+            Download Excel Report
+          </button>
           <div className={`px-5 py-2.5 rounded-2xl flex items-center gap-3 border font-bold text-sm ${
             isDark ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-slate-100 text-slate-700 shadow-sm'
           }`}>

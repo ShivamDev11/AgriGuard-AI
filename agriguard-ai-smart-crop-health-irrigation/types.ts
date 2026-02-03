@@ -1,4 +1,3 @@
-
 export interface DiseaseAnalysis {
   cropName: string;
   status: 'Healthy' | 'Infected' | 'Warning';
@@ -7,6 +6,11 @@ export interface DiseaseAnalysis {
   description: string;
   treatment: string[];
   preventativeMeasures: string[];
+}
+
+export interface DiagnosisHistoryItem extends DiseaseAnalysis {
+  id: string;
+  timestamp: number; // Unix timestamp for 24h cleanup
 }
 
 export interface SensorData {
